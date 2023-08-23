@@ -1,21 +1,9 @@
-import { environment } from '../';
+import { environment } from '../../environments/environent';
 import { Location } from '@angular/common';
 
 export class Util {
-  public static apiAuthUrl(path) {
-    const url1 = Location.joinWithSlash(environment.api_url, 'api/auth');
+  public static apiPublicUrl(path: string) {
+    const url1 = Location.joinWithSlash(environment.api_url, 'api');
     return Location.joinWithSlash(url1, path);
-  }
-
-  public static apiPublicUrl(path) {
-    const url1 = Location.joinWithSlash(environment.api_url, 'api/public');
-    return Location.joinWithSlash(url1, path);
-  }
-  public static apiPublicFile() {
-    const url1 = Location.joinWithSlash(
-      environment.api_url,
-      'api/public/file/'
-    );
-    return url1;
   }
 }

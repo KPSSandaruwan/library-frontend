@@ -13,6 +13,10 @@ import { BookInventoryComponent } from './components/book-inventory/book-invento
 import { BookDescriptionComponent } from './components/book-description/book-description.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddBookComponent } from './components/add-book/add-book.component';
+
 
 
 
@@ -21,7 +25,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AppComponent,
     MainLayoutComponent,
     BookInventoryComponent,
-    BookDescriptionComponent
+    BookDescriptionComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

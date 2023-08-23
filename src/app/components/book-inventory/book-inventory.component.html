@@ -1,21 +1,18 @@
 <div class="container" style="padding: 12px">
   <div class="row">
     <div class="col-12">
-      <button type="button" class="btn btn-info" style="text-align: right">
+      <button type="button" class="btn btn-info" style="text-align: right" (click)="openDialog('0ms', '0ms')">
         Add Book
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 20px;">
     <div class="col-12">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
         <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
-          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <ng-container matColumnDef="isbn">
+          <th mat-header-cell *matHeaderCellDef>ISBN No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.isbn }}</td>
         </ng-container>
 
         <!-- Name Column -->
@@ -25,22 +22,34 @@
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef>Weight</th>
-          <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef>Author</th>
+          <td mat-cell *matCellDef="let element">{{ element.author }}</td>
         </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef>Symbol</th>
-          <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              class="btn btn-primary"
+              [routerLink]="['/categoryDetails', element.id]"
+            >
+              Visit
+            </button>
+            <button
+              style="margin-left: 8px;"
+              class="btn btn-success"
+              [routerLink]="['/categoryDetails', element.id]"
+            >
+              Edit
+            </button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[3, 5, 10]"
-                showFirstLastButtons>
+      <mat-paginator [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons>
       </mat-paginator>
     </div>
   </div>
