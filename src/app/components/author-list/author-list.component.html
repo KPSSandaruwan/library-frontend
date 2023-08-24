@@ -5,7 +5,7 @@
         type="button"
         class="btn btn-info"
         style="text-align: right"
-        (click)="openDialog('0ms', '0ms')"
+        (click)="openDialog('0ms', '0ms', false, null)"
       >
         Add Author
       </button>
@@ -38,8 +38,8 @@
             <button
               style="margin-left: 8px"
               class="btn btn-success"
-              [routerLink]="['/categoryDetails', element.id]"
-            >
+              (click)="openDialog('0ms', '0ms', true, element)"
+              >
               Edit
             </button>
           </td>

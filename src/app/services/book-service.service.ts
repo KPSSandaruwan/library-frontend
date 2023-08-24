@@ -24,4 +24,9 @@ export class BookServiceService {
     const url = Util.apiPublicUrl(`createBook`)
     return this.http.post(url, data)
   }
+
+  editBook(data: any, bookId: string) {
+    const url = Util.apiPublicUrl(`updateBook/${bookId}`)
+    return this.http.put(url, data)
+  }
 }

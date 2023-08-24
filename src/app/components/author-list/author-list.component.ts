@@ -52,16 +52,30 @@ export class AuthorListComponent {
     });
   }
 
-  public openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(AddAuthorComponent, {
+  public openDialog(enterAnimationDuration: string, exitAnimationDuration: string, isEdit: boolean, authorData: any): void {let data: any = {
+    isEdit: isEdit,
+    authorData: authorData
+  }
+    // this.dialog.open(AddAuthorComponent, {
+    //   width: '650px',
+    //   enterAnimationDuration,
+    //   exitAnimationDuration,
+    // });
+
+    const dialogRef = this.dialog.open(AddAuthorComponent, {
       width: '650px',
+      data: data,
       enterAnimationDuration,
       exitAnimationDuration,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
     });
   }
   public openDescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: string): void {
     let data: any = {
-      id: id
+      id: id,
     }
 
     this.dialog.open(AuthorDescriptionComponent, {

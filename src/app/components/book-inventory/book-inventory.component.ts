@@ -30,6 +30,7 @@ export class BookInventoryComponent implements OnInit {
   constructor(private bookService: BookServiceService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.bookData = [];
     this._getBooks();
   }
 
@@ -42,6 +43,7 @@ export class BookInventoryComponent implements OnInit {
             id: book._id,
             isbn: book.isbnNumber,
             name: book.name,
+            authorId: book.authorData._id,
             author: `${book.authorData.firstName} ${book.authorData.lastName}`
           });
         });
@@ -53,11 +55,21 @@ export class BookInventoryComponent implements OnInit {
     });
   }
 
-  public openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(AddBookComponent, {
+  public openDialog(enterAnimationDuration: string, exitAnimationDuration: string, isEdit: boolean, bookData: any): void {
+    let data = {
+      isEdit: isEdit,
+      bookData: bookData
+    }
+
+    const dialogRef = this.dialog.open(AddBookComponent, {
       width: '650px',
+      data: data,
       enterAnimationDuration,
       exitAnimationDuration,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
     });
   }
   public openDescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: string): void {

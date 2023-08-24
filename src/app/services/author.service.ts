@@ -24,4 +24,9 @@ export class AuthorService {
     const url = Util.apiPublicUrl(`createAuthor`)
     return this.http.post(url, authorData)
   }
+
+  editAuthor(authorData: any, authorId: string) {
+    const url = Util.apiPublicUrl(`updateAuthor/${authorId}`)
+    return this.http.post(url, authorData)
+  }
 }
