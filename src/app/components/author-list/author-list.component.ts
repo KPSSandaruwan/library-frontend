@@ -20,6 +20,10 @@ export class AuthorListComponent {
   public displayedColumns: string[] = ['firstName', 'lastName', 'action'];
   public skip: number = 0;
   public limit: number = 2;
+  public itemsPerPage = 2;
+  public totalItems = 0;
+  public authorData: any[] = [];
+  public isActionProgress: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -33,16 +37,16 @@ export class AuthorListComponent {
   private _getAuthors () {
     this.authorService.getAuthors(this.skip, this.limit).subscribe((res: any) => {
       console.log('res', res)
-      let authorData: any[] = []
       if (res.success) {
         res.data.forEach((author: any) => {
-          authorData.push({
+          this.authorData.push({
             id: author._id,
             firstName: author.firstName,
             lastName: author.lastName
           });
         });
-        this.dataSource =  new MatTableDataSource(authorData);
+        this.totalItems = res.totalAuthors;
+        this.dataSource =  new MatTableDataSource(this.authorData);
         this.dataSource.paginator = this.paginator;
       }
     });
@@ -65,6 +69,32 @@ export class AuthorListComponent {
       data: data,
       enterAnimationDuration,
       exitAnimationDuration,
+    });
+  }
+
+  public onPageChange(event: any) {
+    this._getMoreData();
+  }
+
+  private _getMoreData() {
+    if (this.isActionProgress || this.authorData.length === this.totalItems) {
+      return;
+    }
+    this.isActionProgress = true;
+    this.skip++
+    this.authorService.getAuthors(this.skip, this.limit).subscribe((res: any) => {
+      console.log('res', res)
+      if (res.success) {
+        res.data.forEach((author: any) => {
+          this.authorData.push({
+            id: author._id,
+            firstName: author.firstName,
+            lastName: author.lastName
+          });
+        });
+
+        this.isActionProgress = false;
+      }
     });
   }
 }

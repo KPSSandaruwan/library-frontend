@@ -19,6 +19,10 @@ export class BookInventoryComponent implements OnInit {
   public displayedColumns: string[] = ['isbn', 'name', 'author', 'action'];
   public skip: number = 0;
   public limit: number = 0;
+  public itemsPerPage = 2;
+  public totalItems = 0;
+  public bookData: any[] = [];
+  public isActionProgress: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -32,17 +36,18 @@ export class BookInventoryComponent implements OnInit {
   private _getBooks () {
     this.bookService.getBooks(this.skip, this.limit).subscribe((res: any) => {
       console.log('res', res)
-      let bookData: any[] = []
       if (res.success) {
         res.data.forEach((book: any) => {
-          bookData.push({
+          this.bookData.push({
             id: book._id,
             isbn: book.isbnNumber,
             name: book.name,
             author: `${book.authorData.firstName} ${book.authorData.lastName}`
           });
         });
-        this.dataSource =  new MatTableDataSource(bookData);
+        this.totalItems = res.totalBooks;
+
+        this.dataSource =  new MatTableDataSource(this.bookData);
         this.dataSource.paginator = this.paginator;
       }
     });
@@ -65,6 +70,31 @@ export class BookInventoryComponent implements OnInit {
       data: data,
       enterAnimationDuration,
       exitAnimationDuration,
+    });
+  }
+
+  public onPageChange(event: any) {
+    this._getMoreData();
+  }
+
+  private _getMoreData() {
+    if (this.isActionProgress || this.bookData.length === this.totalItems) {
+      return;
+    }
+    this.isActionProgress = true;
+    this.skip++
+    this.bookService.getBooks(this.skip, this.limit).subscribe((res: any) => {
+      if (res.success) {
+        res.data.forEach((book: any) => {
+          this.bookData.push({
+            id: book._id,
+            isbn: book.isbnNumber,
+            name: book.name,
+            author: `${book.authorData.firstName} ${book.authorData.lastName}`
+          });
+        });
+      }
+      this.isActionProgress = true;
     });
   }
 }
