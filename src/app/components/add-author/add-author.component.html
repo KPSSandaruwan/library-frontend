@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add Book</h1>
+<div mat-dialog-content>
+  <form>
+    <div class="form-group">
+      <label for="firstNameInput">First Name</label>
+      <input type="text" class="form-control" id="firstNameInput" [(ngModel)]="firstName" name="firstName"  placeholder="Enter first name">
+    </div>
+    <div class="form-group" style="margin-top: 10px;">
+      <label for="lastNameInput">Last Name</label>
+      <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" name="lastName" [(ngModel)]="lastName">
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="submitForm()">Submit</button>
+</div>

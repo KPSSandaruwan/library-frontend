@@ -18,3 +18,9 @@ body {
 .content {
   padding: 16px;
 }
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Set the minimum height to 100% of the viewport */
+}

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Add Book</h1>
+<div mat-dialog-content>
+  <form>
+    <div class="form-group">
+      <label for="bookNameInput">Book Name</label>
+      <input type="text" class="form-control" id="bookNameInput" [(ngModel)]="bookName" name="bookName"  placeholder="Enter book name">
+    </div>
+    <div class="form-group" style="margin-top: 10px;">
+      <label for="isbnInput">ISBN No.</label>
+      <input type="text" class="form-control" id="isbnInput" placeholder="Enter ISBN number" name="isbn" [(ngModel)]="isbn">
+    </div>
+    <div class="form-group" style="margin-top: 10px;">
+      <label for="authorSelect">Select Author</label>
+      <select class="form-control" id="authorSelect" [(ngModel)]="selectedAuthor" name="selectedAuthor">
+        <option disabled selected>Select an author</option>
+        <option *ngFor="let author of authorList" [value]="author.id">{{ author.name }}</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="submitForm()">Submit</button>
+</div>

@@ -14,4 +14,14 @@ export class BookServiceService {
     const url = Util.apiPublicUrl(`getAllBooks/${skip}/${limit}`)
     return this.http.get(url)
   }
+
+  getBookDetails(bookId: string) {
+    const url = Util.apiPublicUrl(`getBookById/${bookId}`)
+    return this.http.get(url)
+  }
+
+  addBook(data: any) {
+    const url = Util.apiPublicUrl(`createBook`)
+    return this.http.post(url, data)
+  }
 }
