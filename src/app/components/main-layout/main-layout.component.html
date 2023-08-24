@@ -1,7 +1,7 @@
 <div class="dashboard-container" style="display: flex; flex-direction: column">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">Librabry Mangement System</a>
+      <a class="navbar-brand" href="#" style="color: aliceblue;">Librabry Mangement System</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,10 +13,10 @@
     <div class="col-2 sidebar">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/book-inventory">Books</a>
+          <a class="nav-link" routerLink="/book-inventory" routerLinkActive="active">Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/author-list">Authors</a>
+          <a class="nav-link" routerLink="/author-list" routerLinkActive="active">Authors</a>
         </li>
       </ul>
     </div>
@@ -24,7 +24,7 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-  <footer class="footer text-center">
-    2022 &copy; Suraja Sandaruwan | <a href="/" target="_blank">suraja.com</a>
+  <footer class="footer text-center" style="background-color: #212529; color:aliceblue;flex-grow: 0.1; padding-top: 10px">
+    2023 &copy; Suraja Sandaruwan | <a href="/" target="_blank">suraja.com</a>
   </footer>
 </div>

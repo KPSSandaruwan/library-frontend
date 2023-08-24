@@ -22,7 +22,6 @@ export class AddAuthorComponent {
     this.isEdit = this.dialogData.isEdit;
 
     if (this.isEdit) {
-      console.log('dialogData', dialogData);
       this.firstName = dialogData.authorData.firstName;
       this.lastName = dialogData.authorData.lastName;
       this.authorId = dialogData.authorData.id;
